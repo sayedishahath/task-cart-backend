@@ -97,11 +97,12 @@ cartCltr.emptyCart = async (req, res) => {
 
 cartCltr.incQty = async (req, res) => {
     const productId = req.params.id
+    console.log(productId)
     try {
         const cart = await Cart.findOne({ customer : req.user.id })
         // console.log(cart)
         cart.lineItems.forEach((ele) => {
-            if(ele._id == productId) {
+            if(ele.productId == productId) {
                 ele.quantity ++
                 // console.log("design found")
             }
@@ -126,7 +127,7 @@ cartCltr.decQty = async (req, res) => {
         const cart = await Cart.findOne({ customer : req.user.id })
         // console.log(cart)
         cart.lineItems.forEach((ele) => {
-            if(ele._id == productId) {
+            if(ele.productId == productId) {
                 ele.quantity --
                 // console.log("design found")
             }
